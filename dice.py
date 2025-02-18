@@ -154,10 +154,7 @@ async def envoyer_annonce(update: Update, context: CallbackContext):
                 print(f"Erreur lors de l'envoi à {user_id} : {e}")
 
     await update.message.reply_text("📢 Annonce envoyée à tous les utilisateurs.")
-
-if __name__ == "__main__":
-       keep_alive()  # Démarrer le serveur web
-       main()  # Démarrer le bot
+    
 # Initialisation du bot
 def main():
     print("Le bot est en cours d'exécution...")
@@ -175,5 +172,8 @@ def main():
 
     app.run_polling()
 
+# Lancer le bot
 if __name__ == "__main__":
+    keep_alive()
     main()
+    application.run_polling()
