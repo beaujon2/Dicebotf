@@ -9,19 +9,18 @@ TOKEN = "7610262736:AAHYgaBJxJJuoyDcPDzikhSODiPlg0Hs2yI"
 # ID de l'administrateur (ton ID Telegram)
 ADMIN_ID = 6111033488 # Ton vrai ID Telegram
 
-# Ajoutez cette partie pour le serveur web
-   app = Flask(__name__)
+app_web = Flask(__name__)
 
-   @app.route('/')
-   def home():
-       return "🤖 Bot Dice Predict actif !"
+@app_web.route('/')
+def home():
+    return "🤖 Bot Telegram actif !"
 
-   def run():
-       app.run(host='0.0.0.0', port=10000)
+def run_web():
+    port = int(os.environ.get("PORT", 10000))  # Render utilise PORT=10000 par défaut
+    app_web.run(host='0.0.0.0', port=port)
 
-   def keep_alive():
-       Thread(target=run).start()
-       
+def keep_alive():
+    Thread(target=run_web).start()
 
 # Liste pour stocker les utilisateurs inscrits
 users = set()
