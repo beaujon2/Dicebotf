@@ -9,6 +9,10 @@ TOKEN = "7610262736:AAHYgaBJxJJuoyDcPDzikhSODiPlg0Hs2yI"
 # ID de l'administrateur (ton ID Telegram)
 ADMIN_ID = 6111033488 # Ton vrai ID Telegram
 
+async def delete_webhook_and_run():
+        await app.bot.delete_webhook(drop_pending_updates=True)
+        app.run_polling()
+
 app_web = Flask(__name__)
 
 @app_web.route('/')
@@ -176,3 +180,4 @@ def main():
 if __name__ == "__main__":
     keep_alive()
     main()
+asyncio.run(delete_webhook_and_run())
