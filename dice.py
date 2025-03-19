@@ -1,6 +1,5 @@
 from flask import Flask
-from threading import Thread
-import os
+import threading
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters, CallbackContext
 
@@ -9,25 +8,19 @@ TOKEN = "7610262736:AAHYgaBJxJJuoyDcPDzikhSODiPlg0Hs2yI"
 # ID de l'administrateur (ton ID Telegram)
 ADMIN_ID = 6111033488 # Ton vrai ID Telegram
 
-async def delete_webhook_and_run():
-        await app.bot.delete_webhook(drop_pending_updates=True)
-        app.run_polling()
-
-app_web = Flask(__name__)
-
-@app_web.route('/')
-def home():
-    return "🤖 Bot Telegram actif !"
-
-def run_web():
-    port = int(os.environ.get("PORT", 10000))  # Render utilise PORT=10000 par défaut
-    app_web.run(host='0.0.0.0', port=port)
-
-def keep_alive():
-    Thread(target=run_web).start()
-
 # Liste pour stocker les utilisateurs inscrits
 users = set()
+
+# Initialisation du bot
+app_telegram = Application.builder().token(TOKEN).build()
+
+# Création du serveur Flask
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot Telegram en cours d'exécution ! 🚀"
+
 
 # Charger les données utilisateurs
 def load_data():
@@ -158,7 +151,8 @@ async def envoyer_annonce(update: Update, context: CallbackContext):
                 print(f"Erreur lors de l'envoi à {user_id} : {e}")
 
     await update.message.reply_text("📢 Annonce envoyée à tous les utilisateurs.")
-    
+
+
 # Initialisation du bot
 def main():
     print("Le bot est en cours d'exécution...")
@@ -174,10 +168,19 @@ def main():
     app.add_handler(MessageHandler(filters.Text("𝘾𝙊𝙈𝙈𝙀𝙉𝙏 𝘾̧𝘼 𝙈𝘼𝙍𝘾𝙃𝙀 ❗️❓"), how_it_works))
     app.add_handler(MessageHandler(filters.Text("𝙍𝙀𝙏𝙊𝙐𝙍 🔙"), back_to_main_menu))
 
-    app.run_polling()
+# Fonction pour exécuter Flask en parallèle
+def run_flask():
+    app.run(host='0.0.0.0', port=8080)
 
-# Lancer le bot
 if __name__ == "__main__":
-    keep_alive()
+    # Lancer Flask dans un thread séparé
+    threading.Thread(target=run_flask).start()
+    
+    # Lancer le bot Telegram
+    print("Bot Telegram en cours d'exécution...")
+    app_telegram.run_polling()
+
+    # app.run_polling()
+
+if __name__ == "__main__":
     main()
-asyncio.run(delete_webhook_and_run())
