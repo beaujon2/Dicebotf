@@ -1,10 +1,11 @@
 from flask import Flask,request
 import threading
+import os
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters, CallbackContext
 
 TOKEN = "7610262736:AAHYgaBJxJJuoyDcPDzikhSODiPlg0Hs2yI"
-
+WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 # ID de l'administrateur (ton ID Telegram)
 ADMIN_ID = 6111033488 # Ton vrai ID Telegram
 
@@ -19,7 +20,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Bot Telegram en cours d'exécution ! 🚀"
+    return "Bot Telegram fonctionne avec Webhook ! 🚀"
+
+@app.route(f'/{TOKEN}', methods=['POST'])
+async def receive_update():
+    update = Update.de_json(request.get_json(), bot)
+    await app_telegram.process_update(update)
+    return "OK", 200
 
 
 # Charger les données utilisateurs
@@ -168,16 +175,15 @@ def main():
     app.add_handler(MessageHandler(filters.Text("𝘾𝙊𝙈𝙈𝙀𝙉𝙏 𝘾̧𝘼 𝙈𝘼𝙍𝘾𝙃𝙀 ❗️❓"), how_it_works))
     app.add_handler(MessageHandler(filters.Text("𝙍𝙀𝙏𝙊𝙐𝙍 🔙"), back_to_main_menu))
 
-# Fonction pour exécuter Flask en parallèle
-def run_flask():
-    app.run(host='0.0.0.0', port=8080)
 
 if __name__ == "__main__":
-    # Lancer Flask dans un thread séparé
-    threading.Thread(target=run_flask).start()
+    # Supprimer les anciens Webhooks
+    bot.delete_webhook()
     
-    # Lancer le bot Telegram
-    print("Bot Telegram en cours d'exécution...")
-    app_telegram.run_polling()
+    # Définir un nouveau Webhook
+    bot.set_webhook(f"{WEBHOOK_URL}/{TOKEN}")
+
+    # Lancer Flask
+    app.run(host='0.0.0.0', port=8080)
 
     # app.run_polling()
