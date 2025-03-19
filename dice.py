@@ -14,6 +14,8 @@ users = set()
 
 # Initialisation du bot
 app_telegram = Application.builder().token(TOKEN).build()
+bot = Bot(token=TOKEN)
+
 
 # Création du serveur Flask
 app = Flask(__name__)
