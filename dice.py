@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask,request
 import threading
 from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters, CallbackContext
@@ -181,6 +181,3 @@ if __name__ == "__main__":
     app_telegram.run_polling()
 
     # app.run_polling()
-
-if __name__ == "__main__":
-    main()
