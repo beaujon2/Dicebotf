@@ -23,9 +23,9 @@ bot = Bot(token=TOKEN)
 # Création du serveur Flask
 app = Flask(__name__)
 
-async def setup_webhook():
-    await bot.delete_webhook()
-    await bot.set_webhook(f"{WEBHOOK_URL}/{TOKEN}")
+# async def setup_webhook():
+#     await bot.delete_webhook()
+#     await bot.set_webhook(f"{WEBHOOK_URL}/{TOKEN}")
 
 @app.route("/", methods=["GET"])
 def home():
