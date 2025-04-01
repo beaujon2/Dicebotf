@@ -26,6 +26,15 @@ async def setup_webhook():
     await bot.delete_webhook()
     await bot.set_webhook(f"{WEBHOOK_URL}/{TOKEN}")
 
+@app.route("/", methods=["GET"])
+def home():
+    return "Le bot est en ligne"
+
+@app.route(f"/{TOKEN}", methods=["POST"])
+def webhook():
+    update = request.get_json()
+    print("Réception d'un message :", update)  # Debug
+    return "OK", 200  # Réponse correcte
 
 # Charger les données utilisateurs
 def load_data():
@@ -173,16 +182,24 @@ def main():
     app.add_handler(MessageHandler(filters.Text("𝘾𝙊𝙈𝙈𝙀𝙉𝙏 𝘾̧𝘼 𝙈𝘼𝙍𝘾𝙃𝙀 ❗️❓"), how_it_works))
     app.add_handler(MessageHandler(filters.Text("𝙍𝙀𝙏𝙊𝙐𝙍 🔙"), back_to_main_menu))
 
+# Configuration du webhook au lancement
+def set_webhook():
+    url = f"https://api.telegram.org/bot{TOKEN}/setWebhook?url={WEBHOOK_URL}/{TOKEN}"
+    response = requests.get(url)
+    print(response.json())
 
+if __name__ == "__main__":
+    set_webhook()  # Active le webhook
+    app.run(host="0.0.0.0", port=8080)
 # Exécuter l'initialisation du webhook
 asyncio.run(setup_webhook())
 
-@app.route("/", methods=["GET"])
-def home():
-    return "Bot actif ! 🚀"
+# @app.route("/", methods=["GET"])
+# def home():
+#     return "Bot actif ! 🚀"
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+# if __name__ == "__main__":
+#     app.run(host="0.0.0.0", port=8080)
 
 
 # if __name__ == "__main__":
