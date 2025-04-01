@@ -5,7 +5,7 @@ from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKe
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters, CallbackContext
 
 TOKEN = "7610262736:AAHYgaBJxJJuoyDcPDzikhSODiPlg0Hs2yI"
-WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+WEBHOOK_URL = https://dicebotf-oo87.onrender.com
 # ID de l'administrateur (ton ID Telegram)
 ADMIN_ID = 6111033488 # Ton vrai ID Telegram
 
@@ -20,15 +20,9 @@ bot = Bot(token=TOKEN)
 # Création du serveur Flask
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return "Bot Telegram fonctionne avec Webhook ! 🚀"
-
-@app.route(f'/{TOKEN}', methods=['POST'])
-async def receive_update():
-    update = Update.de_json(request.get_json(), bot)
-    await app_telegram.process_update(update)
-    return "OK", 200
+async def setup_webhook():
+    await bot.delete_webhook()
+    await bot.set_webhook(f"{WEBHOOK_URL}/{TOKEN}")
 
 
 # Charger les données utilisateurs
@@ -178,14 +172,25 @@ def main():
     app.add_handler(MessageHandler(filters.Text("𝙍𝙀𝙏𝙊𝙐𝙍 🔙"), back_to_main_menu))
 
 
+# Exécuter l'initialisation du webhook
+asyncio.run(setup_webhook())
+
+@app.route("/", methods=["GET"])
+def home():
+    return "Bot actif ! 🚀"
+
 if __name__ == "__main__":
-    # Supprimer les anciens Webhooks
-    bot.delete_webhook()
+    app.run(host="0.0.0.0", port=8080)
+
+
+# if __name__ == "__main__":
+#     # Supprimer les anciens Webhooks
+#     bot.delete_webhook()
     
-    # Définir un nouveau Webhook
-    bot.set_webhook(f"{WEBHOOK_URL}/{TOKEN}")
+#     # Définir un nouveau Webhook
+#     bot.set_webhook(f"{WEBHOOK_URL}/{TOKEN}")
 
-    # Lancer Flask
-    app.run(host='0.0.0.0', port=8080)
+#     # Lancer Flask
+#     app.run(host='0.0.0.0', port=8080)
 
-    # app.run_polling()
+#     # app.run_polling()
