@@ -5,7 +5,8 @@ from telegram import Update, ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKe
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters, CallbackContext
 
 TOKEN = "7610262736:AAHYgaBJxJJuoyDcPDzikhSODiPlg0Hs2yI"
-WEBHOOK_URL = https://dicebotf-oo87.onrender.com
+WEBHOOK_URL = "https://dicebotf-oo87.onrender.com"
+
 # ID de l'administrateur (ton ID Telegram)
 ADMIN_ID = 6111033488 # Ton vrai ID Telegram
 
