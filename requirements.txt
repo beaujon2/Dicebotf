@@ -18,3 +18,6 @@ urllib3==2.3.0
 flask
 pytelegrambotapi
 requests
+python-telegram-bot==20.8
+Flask==3.0.3
+
