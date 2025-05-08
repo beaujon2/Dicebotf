@@ -1,12 +1,19 @@
-import requests
-import time
+# server.py
 
-URL = "https://dicebotf-oo87.onrender.com"
+from flask import Flask
+from threading import Thread
+from bot import run_bot
 
-while True:
-    try:
-        requests.get(URL)
-        print("Ping envoyé")
-    except Exception as e:
-        print("Erreur :", e)
-    time.sleep(300)  # Ping toutes les 5 minutes
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Bot Dice actif 24h/24 🚀"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+# Lancer le serveur Flask et le bot Telegram en parallèle
+if __name__ == '__main__':
+    Thread(target=run).start()
+    run_bot()
