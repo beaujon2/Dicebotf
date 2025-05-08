@@ -141,7 +141,7 @@ async def envoyer_annonce(update: Update, context: CallbackContext):
 
 
 # Initialisation du bot
-def main():
+def run_bot():
     print("Le bot est en cours d'exécution...")
     app = Application.builder().token(TOKEN).build()
 
