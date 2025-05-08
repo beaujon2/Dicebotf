@@ -2,7 +2,7 @@
 
 from flask import Flask
 from threading import Thread
-from bot import run_bot
+from dice import run_bot
 
 app = Flask(__name__)
 
