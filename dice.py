@@ -140,6 +140,34 @@ async def envoyer_annonce(update: Update, context: CallbackContext):
     await update.message.reply_text("📢 Annonce envoyée à tous les utilisateurs.")
 
 
+
+# Commande pour envoyer des annonces multimédias
+# async def envoyer_annonce(update: Update, context: CallbackContext):
+#     if update.message.from_user.id != 6111033488:  # Remplacez par votre ID admin
+#         await update.message.reply_text("❌ Vous n'avez pas la permission d'utiliser cette commande.")
+#         return
+
+#     if update.message.photo:
+#         media_id = update.message.photo[-1].file_id
+#         caption = update.message.caption
+#         for user_id in load_data().keys():
+#             try:
+#                 await context.bot.send_photo(chat_id=user_id, photo=media_id, caption=caption)
+#             except Exception as e:
+#                 print(f"Erreur lors de l'envoi à {user_id} : {e}")
+
+#     elif update.message.video:
+#         media_id = update.message.video.file_id
+#         caption = update.message.caption
+#         for user_id in load_data().keys():
+#             try:
+#                 await context.bot.send_video(chat_id=user_id, video=media_id, caption=caption)
+#             except Exception as e:
+#                 print(f"Erreur lors de l'envoi à {user_id} : {e}")
+
+#     await update.message.reply_text("📢 Annonce envoyée à tous les utilisateurs.")
+
+
 # Initialisation du bot
 def run_bot():
     print("Le bot est en cours d'exécution...")
@@ -159,3 +187,4 @@ def run_bot():
 
 # if __name__ == "__main__":
 #     main()
+
