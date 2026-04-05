@@ -29,7 +29,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     inscription_button = InlineKeyboardMarkup([
-        [InlineKeyboardButton("S'INSCRIRE", url="https://1wyvrz.life/?open=register&p=fd5e")]
+        [InlineKeyboardButton("S'INSCRIRE", url="https://one-vv624.com/?open=register&p=fd5e")]
     ])
 
     await update.message.reply_text(
