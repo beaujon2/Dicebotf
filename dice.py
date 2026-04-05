@@ -73,12 +73,13 @@ async def how_it_works(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "-𝙵𝚊𝚒𝚛𝚎 𝚞𝚗 𝚍𝚎́𝚙𝚘̂𝚝 𝚖𝚒𝚗𝚒𝚖𝚞𝚖 𝚍𝚎  𝟸𝟶𝟶𝟶 𝙵𝙲𝙵𝙰 𝚙𝚘𝚞𝚛 𝚊𝚌𝚝𝚒𝚟𝚎́  𝚕𝚊 𝚏𝚊𝚒𝚕𝚕𝚎 𝚎𝚝 𝚛𝚎𝚌𝚎𝚟𝚘𝚒𝚛 𝟻𝟶𝟶% 𝚍𝚎 𝚋𝚘𝚗us 𝚜𝚞𝚛 𝚕𝚎𝚜 𝟺 𝚙𝚛𝚎𝚖𝚒𝚎𝚛𝚜 𝚍𝚎́𝚙𝚘̂𝚝\n\n"
         "-𝚁𝚎𝚌𝚑𝚎𝚛𝚌𝚑𝚎𝚛 𝚕𝚎 𝚓𝚎𝚞 𝗗𝗶𝗰𝗲 𝚜𝚞𝚛 𝟷𝚠𝚒𝚗.\n\n"
         "- 𝙲𝚕𝚒𝚚𝚞𝚎𝚣 𝚜𝚞𝚛 𝙁𝘼𝙄𝙍𝙀 𝙐𝙉𝙀 𝙋𝙍𝙀‌𝘿𝙄𝘾𝙏𝙄𝙊𝙉 🎲𝚙𝚘𝚞𝚛 𝚊𝚟𝚘𝚒𝚛 𝚞𝚗 𝚙𝚛𝚎́𝚍𝚒𝚌𝚝𝚒𝚘𝚗 𝚊 𝚓𝚘𝚞𝚎𝚛.\n\n"
+        "-INSCRIPTION : https://one-vv624.com/?open=register&p=fd5e \n\n"
         "- Vidéo : https://youtu.be/xjBVuXp_AJ4?si=KGSCHGgPKIu_2y5w "
     )
     keyboard = [["𝙍𝙀𝙏𝙊𝙐𝙍 🔙"]]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
-    await update.message.reply_text(text,reply_markup=inscription_button, reply_markup=reply_markup)
+    await update.message.reply_text(text, reply_markup=reply_markup)
 
 # Fonction pour faire une prédiction avec précision ajustée
 import random
