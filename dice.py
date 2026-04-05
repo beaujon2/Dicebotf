@@ -77,8 +77,9 @@ async def how_it_works(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
      # 👉 Boutons lien (inline)
     inline_keyboard = [
-        [InlineKeyboardButton("S'INSCRIRE", url="https://one-vv624.com/?open=register&p=fd5e")],
-        [InlineKeyboardButton("🎥 Voir la vidéo", url="https://youtu.be/xjBVuXp_AJ4?si=KGSCHGgPKIu_2y5w")]
+        [InlineKeyboardButton("S'INSCRIRE", url="https://one-vv624.com/?open=register&p=fd5e")]
+        # ,
+        # [InlineKeyboardButton("🎥 Voir la vidéo", url="https://youtu.be/xjBVuXp_AJ4?si=KGSCHGgPKIu_2y5w")]
     ]
     inline_markup = InlineKeyboardMarkup(inline_keyboard)
 
